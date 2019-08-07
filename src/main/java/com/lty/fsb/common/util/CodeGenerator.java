@@ -71,7 +71,7 @@ public class CodeGenerator {
         PackageConfig pc = new PackageConfig();
         //pc.setModuleName(scanner("模块名"));
         pc.setParent("com.lty.fsb");
-        pc.setController("controller."+className);// 这里是控制器包名，默认 web
+        pc.setController("controller");// 这里是控制器包名，默认 web
         pc.setEntity("entity."+className);
         pc.setMapper(daoPath+className);
         pc.setXml("mapping."+className);
