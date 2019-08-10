@@ -1,5 +1,6 @@
 package com.lty.fsb.common.util;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -40,8 +41,8 @@ public class CodeGenerator {
         String databaseUser = "root";
         String databasePWD = "123456";
         String className = "user";
-        String db="Db1";
-        String daoPath="dao.daoDb1.";
+
+
 
 
         // 代码生成器
@@ -55,6 +56,10 @@ public class CodeGenerator {
         gc.setFileOverride(true);// 是否覆盖同名文件，默认是false
         gc.setAuthor("lty");
         gc.setOpen(false);
+        gc.setIdType(IdType.AUTO);
+        gc.setBaseResultMap(true);
+        gc.setActiveRecord(true);
+        gc.setBaseColumnList(true);
         // gc.setSwagger2(true); 实体属性 Swagger2 注解
         mpg.setGlobalConfig(gc);
 
@@ -71,12 +76,12 @@ public class CodeGenerator {
         PackageConfig pc = new PackageConfig();
         //pc.setModuleName(scanner("模块名"));
         pc.setParent("com.lty.fsb");
-        pc.setController("controller");// 这里是控制器包名，默认 web
-        pc.setEntity("entity."+className);
-        pc.setMapper(daoPath+className);
-        pc.setXml("mapping."+className);
-        pc.setService("service."+className);
-        pc.setServiceImpl("service."+className+".impl");
+        pc.setController("controller.system");// 这里是控制器包名，默认 web
+        pc.setEntity("entity.system");
+        pc.setMapper("dao.system");
+        pc.setXml("mapping");
+        pc.setService("service.system");
+        pc.setServiceImpl("service.system.impl");
         mpg.setPackageInfo(pc);
 
         mpg.setPackageInfo(pc);
@@ -101,7 +106,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapping/" + db+"/"+className
+                return projectPath + "/src/main/resources/mapping/" + "/"+"system"
                         + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });

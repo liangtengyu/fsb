@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class CodeGeneratorDb2 {
@@ -39,8 +40,8 @@ public class CodeGeneratorDb2 {
         String databaseUser = "root";
         String databasePWD = "123456";
         String className = "oil";
-        String db="Db2";
-        String daoPath="dao.daoDb2.";
+
+
 
 
         // 代码生成器
@@ -68,14 +69,14 @@ public class CodeGeneratorDb2 {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        //pc.setModuleName(scanner("模块名"));
+        /*pc.setModuleName(scanner("生成类的名字"));*/
         pc.setParent("com.lty.fsb");
         pc.setController("controller");// 这里是控制器包名，默认 web
-        pc.setEntity("entity."+className);
-        pc.setMapper(daoPath+className);
-        pc.setXml("mapping."+className);
-        pc.setService("service."+className);
-        pc.setServiceImpl("service."+className+".impl");
+        pc.setEntity("entity");
+        pc.setMapper("dao");
+        pc.setXml("mapping");
+        pc.setService("service");
+        pc.setServiceImpl("service.impl");
         mpg.setPackageInfo(pc);
 
         mpg.setPackageInfo(pc);
@@ -100,7 +101,7 @@ public class CodeGeneratorDb2 {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapping/"  + db+"/"+className
+                return projectPath + "/src/main/resources/mapping/" + "/"+className
                         + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });

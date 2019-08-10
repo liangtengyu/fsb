@@ -3,58 +3,25 @@ server:
 #alibaba的druid数据库连接池配置
 spring:
   datasource:
-    db1:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      type: com.alibaba.druid.pool.DruidDataSource
-      jdbc-url: jdbc:mysql://localhost:3306/fsb?useUnicode=true&useSSL=false&characterEncoding=utf8   #生产读写分离
-      username: root
-      password: 123456
-      # 使用druid数据源
-      filters: stat,wall,log4j #监控统计用的filter:stat 日志用的filter:log4j 防御sql注入的filter:wall
-      maxActive: 200
-      initialSize: 1
-      maxWait: 60000
-      minIdle: 1
-      timeBetweenEvictionRunsMillis: 60000
-      minEvictableIdleTimeMillis: 300000
-      validationQuery: select 'x'
-      testWhileIdle: true
-      testOnBorrow: false
-      testOnReturn: false
-      poolPreparedStatements: true
-      maxOpenPreparedStatements: 20
-      connectionProperties: druid.stat.mergeSql:true;druid.stat.slowSqlMillis:5000
-      removeAbandoned: true
-      removeAbandonedTimeout: 10
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      datasource:
+          master:
+            username: root
+            password: 123456
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://localhost:3306/fsb?useUnicode=true&useSSL=false&characterEncoding=utf8
+          DB2:
+            username: root
+            password: 123456
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            url: jdbc:mysql://localhost:3306/oil?useUnicode=true&characterEncoding=utf8
+         # slave_2:
+         #   username: root
+         #   password: 123456
+          #  driver-class-name: com.mysql.cj.jdbc.Driver
+          #  url: jdbc:mysql://xx.xx.xx.xx:3308/dynamic
 
-
-
-
-    #alibaba的druid数据库连接池配置
-
-    db2:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      type: com.alibaba.druid.pool.DruidDataSource
-      jdbc-url: jdbc:mysql://localhost:3306/oil?useUnicode=true&characterEncoding=utf8   #生产读写分离
-      username: root
-      password: 123456
-      # 使用druid数据源
-      filters: stat,wall,log4j #监控统计用的filter:stat 日志用的filter:log4j 防御sql注入的filter:wall
-      maxActive: 200
-      initialSize: 1
-      maxWait: 60000
-      minIdle: 1
-      timeBetweenEvictionRunsMillis: 60000
-      minEvictableIdleTimeMillis: 300000
-      validationQuery: select 'x'
-      testWhileIdle: true
-      testOnBorrow: false
-      testOnReturn: false
-      poolPreparedStatements: true
-      maxOpenPreparedStatements: 20
-      connectionProperties: druid.stat.mergeSql:true;druid.stat.slowSqlMillis:5000
-      removeAbandoned: true
-      removeAbandonedTimeout: 10
   cache:
     cache-names: cache1
     redis:
@@ -68,7 +35,16 @@ spring:
 
 
 mybatis-plus:
-  mapperLocations: classpath:/mybatis/mapper/*.xml
+  mapper-locations:  classpath:mapping/*/*.xml
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      #id类型
+     id-type: auto
+
 
 
 

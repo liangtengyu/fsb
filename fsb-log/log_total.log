@@ -1,0 +1,18 @@
+2019-08-10 17:40:20.264  INFO 2022 --- [main] com.lty.fsb.FsbApplication               : Starting FsbApplication on liangdeiMac.local with PID 2022 (/Users/lty/IdeaProjects/fsb/target/classes started by lty in /Users/lty/IdeaProjects/fsb)
+2019-08-10 17:40:20.266  INFO 2022 --- [main] com.lty.fsb.FsbApplication               : The following profiles are active: dev
+2019-08-10 17:40:21.107  INFO 2022 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9999 (http)
+2019-08-10 17:40:21.122  INFO 2022 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-10 17:40:21.123  INFO 2022 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-08-10 17:40:21.178  INFO 2022 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-10 17:40:21.178  INFO 2022 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 884 ms
+2019-08-10 17:40:21.304  INFO 2022 --- [main] com.zaxxer.hikari.HikariDataSource       : master - Starting...
+2019-08-10 17:40:21.432  INFO 2022 --- [main] com.zaxxer.hikari.HikariDataSource       : master - Start completed.
+2019-08-10 17:40:21.433  INFO 2022 --- [main] com.zaxxer.hikari.HikariDataSource       : DB2 - Starting...
+2019-08-10 17:40:21.436  INFO 2022 --- [main] com.zaxxer.hikari.HikariDataSource       : DB2 - Start completed.
+2019-08-10 17:40:21.437  INFO 2022 --- [main] c.b.d.d.DynamicRoutingDataSource         : 初始共加载 2 个数据源
+2019-08-10 17:40:21.437  INFO 2022 --- [main] c.b.d.d.DynamicRoutingDataSource         : 动态数据源-加载 DB2 成功
+2019-08-10 17:40:21.437  INFO 2022 --- [main] c.b.d.d.DynamicRoutingDataSource         : 动态数据源-加载 master 成功
+2019-08-10 17:40:21.437  INFO 2022 --- [main] c.b.d.d.DynamicRoutingDataSource         : 当前的默认数据源是单数据源，数据源名为 master
+2019-08-10 17:40:21.942  INFO 2022 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-10 17:40:22.150  INFO 2022 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9999 (http) with context path ''
+2019-08-10 17:40:22.153  INFO 2022 --- [main] com.lty.fsb.FsbApplication               : Started FsbApplication in 2.34 seconds (JVM running for 3.061)

@@ -8,6 +8,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 @SpringBootApplication
+@MapperScan("com.lty.fsb.dao")
 public class FsbApplication {
 
     public static void main(String[] args) {
