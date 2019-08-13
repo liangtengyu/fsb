@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lty.fsb.dao.system.TRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lty.fsb.entity.system.TRole">
+        <id column="ROLE_ID" property="roleId" />
+        <result column="ROLE_NAME" property="roleName" />
+        <result column="REMARK" property="remark" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="MODIFY_TIME" property="modifyTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ROLE_ID, ROLE_NAME, REMARK, CREATE_TIME, MODIFY_TIME
+    </sql>
+    <select id="findUserRole" resultMap="BaseResultMap">
+        SELECT
+            r.*
+        FROM
+            t_role r
+        LEFT JOIN t_user_role ur ON (r.role_id = ur.role_id)
+        LEFT JOIN t_user u ON (u.user_id = ur.user_id)
+        WHERE
+            u.username = #{username}
+    </select>
+
+</mapper>
