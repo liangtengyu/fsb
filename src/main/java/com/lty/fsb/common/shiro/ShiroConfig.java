@@ -14,6 +14,7 @@ import org.apache.shiro.web.servlet.SimpleCookie;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -88,10 +89,15 @@ public class ShiroConfig {
         return credentialsMatcher;
     }
 
+    /**
+     * 这句 解决了从application-dev.yml中获取不到redis配置值得问题  原因不详 有知道答案的吗 ？ 0.0
+     * @return
+     */
     @Bean
-    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
+    public static LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
+
 
     /**
      * 开启Shiro的注解支持
@@ -110,27 +116,42 @@ public class ShiroConfig {
     @Bean
     public SessionManager sessionManager() {
         MySessionManager mySessionManager = new MySessionManager();
-        //mySessionManager.setSessionDAO(redisSessionDAO());
-       // mySessionManager.setCacheManager(cacheManager());
+        mySessionManager.setSessionDAO(redisSessionDAO());
+        mySessionManager.setCacheManager(cacheManager());
         mySessionManager.setSessionIdUrlRewritingEnabled(true);
         return mySessionManager;
     }
 
-/*    *//**
+    /**
      * 使用shiro-redis配置
      *
      * @return
-     *//*
-    @ConfigurationProperties(prefix = "redis.shiro")
+     */
+    @Value("${spring.redis.host}")
+    private  String  HOST;
+    @Value("${spring.redis.port}")
+    private  String  PORT;
+    @Value("${spring.redis.password}")
+    private  String  PASSWORD;
+    @Value("${spring.redis.timeout}")
+    private  int  TIMEOUT;
+    @Value("${spring.redis.database:0}")
+    private  int  DATABASE;
+
     public RedisManager redisManager() {
-        return new RedisManager();
+        RedisManager redisManager = new RedisManager();
+        redisManager.setHost(HOST+":" +PORT);
+        redisManager.setPassword(PASSWORD);
+        redisManager.setDatabase(DATABASE);
+        redisManager.setTimeout(TIMEOUT);
+        return redisManager;
     }
 
-    *//**
+    /**
      * redis实现缓存
      *
      * @return
-     *//*
+     */
     @Bean
     public RedisCacheManager cacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
@@ -138,15 +159,15 @@ public class ShiroConfig {
         return redisCacheManager;
     }
 
-    *//**
-     * 使用Redis实现 shiro sessionDao
+    /**
+            * 使用Redis实现 shiro sessionDao
      *
-     * @return
-     *//*
+             * @return
+             */
     @Bean
     public RedisSessionDAO redisSessionDAO() {
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
         redisSessionDAO.setRedisManager(redisManager());
         return redisSessionDAO;
-    }*/
+    }
 }
