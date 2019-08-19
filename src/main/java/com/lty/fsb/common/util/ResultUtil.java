@@ -1,144 +1,62 @@
 package com.lty.fsb.common.util;
 
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ResultUtil {
-
-    public static String REQUESTFAILD = "request faild";  //请求失败
-
-
-    /**
-     * 请求成功
-     * @param data
-     * @return
-     */
-    public static Result
-    requestSuccess(String data) throws Exception{
+    private static Logger logger = LoggerFactory.getLogger(ResultUtil.class);
+    public static Result success(Object object){
         Result result = new Result();
-        result.setCode("00");
-        result.setMsg("request success");
-        if(data==null|| "".equals(data)){
-            result.setData("");
-        }
-        return  result;
+        result.setCode(0);
+        result.setMsg("成功");
+        result.setData(object);
+        logger.info("成功结果>>>>>> \n"+object.toString());
+        return result;
+    }
+    public static Result success(String msg){
+        Result result = new Result();
+        result.setCode(0);
+        result.setMsg(msg);
+        logger.info("成功结果>>>>>> \n"+msg);
+        return result;
+    }
+    public static Result success(String msg,Object object){
+        Result result = new Result();
+        result.setCode(0);
+        result.setMsg(msg);
+        result.setData(object);
+        logger.info("成功结果>>>>>> \n"+msg+object.toString());
+        return result;
     }
 
-    /**
-     * 请求成功
-     * @param data
-     * @return
-     */
-    public static Result requestSuccess(String data,String msg) throws Exception{
+    public static Result failed(String msg){
         Result result = new Result();
-        result.setCode("00");
-        if(msg==null||"".equals(msg)){
-            result.setMsg("request success");
-        }else{
-            result.setMsg(msg);
-        }
-        if(data==null|| "".equals(data)){
-            result.setData("");
-        }
-        return  result;
+        result.setCode(-1);
+        result.setMsg(msg);
+        logger.info("返回失败原因>>>>>> \n"+msg);
+        return result;
     }
-
-    /**
-     * 请求成功
-     * @param data
-     * @return
-     */
-    public static Result requestSuccess(String data,String msg,String code) throws Exception{
+    public static Result failed(String msg,Object o){
         Result result = new Result();
-        if(code==null||"".equals(code)){
-            result.setCode("00");
-        }else{
-            result.setCode(code);
-        }
-        if(msg==null||"".equals(msg)){
-            result.setMsg("request success");
-        }else{
-            result.setMsg(msg);
-        }
-        if(data==null|| "".equals(data)){
-            result.setData("");
-        }
-        return  result;
-    }
-
-    /**
-     * 请求成功
-     * @param
-     * @return
-     */
-    public static Result success(Object o){
-        Result result = new Result();
-        result.setCode("00");
-        result.setMsg("request success");
+        result.setCode(-1);
+        result.setMsg(msg);
         result.setData(o);
-        return  result;
+        logger.info("返回失败原因>>>>>> :"+msg+o.toString());
+        return result;
     }
 
-    /**
-     * 请求失败
-     * @return
-     */
-    public static  Result requestFaild(String msg){
+    public static Result success(){
+        return success("");
+    }
+
+    public static Result error(Integer code,String msg){
         Result result = new Result();
-        result.setCode("-1");
-        result.setData(null);
-        if(msg==null||"".equals(msg)){
-            result.setMsg(REQUESTFAILD);
-        }else{
-            result.setMsg(msg);
-        }
-        return  result;
+        result.setCode(code);
+        result.setMsg(msg);
+        return result;
     }
-
-
-    /**
-     * 请求失败
-     * @return
-     */
-    public static  Result requestFaild(String msg,String code){
-        Result result = new Result();
-        result.setData(null);
-        if(msg==null||"".equals(msg)){
-            result.setCode("-1");
-        }else{
-            result.setCode(code);
-        }
-        if(msg==null||"".equals(msg)){
-            result.setMsg(REQUESTFAILD);
-        }else{
-            result.setMsg(msg);
-        }
-        return  result;
-    }
-
-    /**
-     * 请求失败
-     * @return
-     */
-    public static  Result requestFaild(String data,String msg,String code){
-        Result result = new Result();
-        if(data==null||"".equals(data)){
-            result.setData(null);
-        }else{
-            result.setData(data);
-        }
-        if(msg==null||"".equals(msg)){
-            result.setCode("-1");
-        }else{
-            result.setCode(code);
-        }
-        if(msg==null||"".equals(msg)){
-            result.setMsg(REQUESTFAILD);
-        }else{
-            result.setMsg(msg);
-        }
-        return  result;
-    }
-
-
 
 
 }

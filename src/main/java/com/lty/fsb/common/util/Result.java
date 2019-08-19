@@ -3,15 +3,15 @@ package com.lty.fsb.common.util;
 
 public class Result {
 
-    private String code;
-    private String msg;   //-1:异常    00:成功  01以上是其他原因
+    private Integer code; //-1:异常    00:成功  01以上是其他原因
+    private String msg;
     private Object data;
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 

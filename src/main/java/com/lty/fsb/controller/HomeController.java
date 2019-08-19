@@ -1,23 +1,21 @@
 package com.lty.fsb.controller;
 
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.lty.fsb.common.util.MD5Util;
 import com.lty.fsb.common.util.Result;
 import com.lty.fsb.common.util.ResultUtil;
-import com.lty.fsb.entity.system.TUser;
-import org.apache.shiro.SecurityUtils;
+import com.lty.fsb.service.system.impl.TUserServiceImpl;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Date;
 
 import static org.apache.shiro.SecurityUtils.getSubject;
 
@@ -29,6 +27,9 @@ import static org.apache.shiro.SecurityUtils.getSubject;
 @RestController
 @CrossOrigin
 public class HomeController  {
+    @Autowired
+    TUserServiceImpl userService;
+
     @RequestMapping("home")
     public String home(){
         return "homePage";
@@ -58,7 +59,11 @@ public class HomeController  {
         return ResultUtil.success(userToken);
     }
 
-
+    @RequestMapping("reg")
+    public Result regTest(@RequestBody String Data) throws Exception {
+        Result result = userService.insertOneUser(Data);
+        return result;
+    }
 
 
     public static void main(String[] args) {

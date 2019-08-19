@@ -1,5 +1,6 @@
 package com.lty.fsb.service.system;
 
+import com.lty.fsb.common.util.Result;
 import com.lty.fsb.entity.system.TUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -14,4 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ITUserService extends IService<TUser> {
 
     TUser findByName(String userName);
+
+    Result insertOneUser(String Data) throws Exception;
 }
