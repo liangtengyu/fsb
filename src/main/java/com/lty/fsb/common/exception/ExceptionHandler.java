@@ -1,3 +1,4 @@
+/*
 package com.lty.fsb.common.exception;
 
 
@@ -16,3 +17,4 @@ public class ExceptionHandler {
         return ResultUtil.failed("报错了  " + message, "-1");
     }
 }
+*/

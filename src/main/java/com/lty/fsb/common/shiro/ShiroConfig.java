@@ -29,7 +29,7 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        shiroFilterFactoryBean.setLoginUrl("/index.html");
+        shiroFilterFactoryBean.setLoginUrl("/");
         shiroFilterFactoryBean.setUnauthorizedUrl("/error/403");
 
         //配置拦截器链，注意顺序
@@ -37,8 +37,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/reg", "anon");
-        filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/gifCode", "anon");
+        filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/fonts/**", "anon");
@@ -46,7 +46,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/lib/**", "anon");
 
-        /*filterChainDefinitionMap.put("/**", "user");*/
+        filterChainDefinitionMap.put("/**", "user");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
@@ -118,17 +118,17 @@ public class ShiroConfig {
     @Bean
     public SessionManager sessionManager() {
         MySessionManager mySessionManager = new MySessionManager();
-        mySessionManager.setSessionDAO(redisSessionDAO());
-        mySessionManager.setCacheManager(cacheManager());
+/*        mySessionManager.setSessionDAO(redisSessionDAO());
+        mySessionManager.setCacheManager(cacheManager());*/
         mySessionManager.setSessionIdUrlRewritingEnabled(true);
         return mySessionManager;
     }
 
-    /**
+ /*   *//**
      * 使用shiro-redis配置
      *
      * @return
-     */
+     *//*
     @Value("${spring.redis.host}")
     private  String  HOST;
     @Value("${spring.redis.port}")
@@ -149,11 +149,11 @@ public class ShiroConfig {
         return redisManager;
     }
 
-    /**
+    *//**
      * redis实现缓存
      *
      * @return
-     */
+     *//*
     @Bean
     public RedisCacheManager cacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
@@ -161,15 +161,15 @@ public class ShiroConfig {
         return redisCacheManager;
     }
 
-    /**
+    *//**
             * 使用Redis实现 shiro sessionDao
      *
              * @return
-             */
+             *//*
     @Bean
     public RedisSessionDAO redisSessionDAO() {
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
         redisSessionDAO.setRedisManager(redisManager());
         return redisSessionDAO;
-    }
+    }*/
 }

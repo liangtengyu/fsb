@@ -9,10 +9,15 @@ import com.lty.fsb.entity.system.TUser;
 import com.lty.fsb.dao.system.TUserMapper;
 import com.lty.fsb.service.system.ITUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import static org.apache.shiro.SecurityUtils.getSubject;
 
 /**
  * <p>
@@ -35,7 +40,7 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     }
 
     @Override
-    public Result insertOneUser(String Data)  {
+    public Result insertOneUser(String Data) throws Exception {
         JSONObject jsonObject = JSONObject.parseObject(Data);
         String username = (String) jsonObject.get("username");
         String password = (String) jsonObject.get("password");
@@ -48,7 +53,22 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
         user.setCreateTime(LocalDateTime.now());
         int insert = mapper.insert(user);
         if (insert>=1) {
-            return ResultUtil.success("插入用户成功");
+
+            UsernamePasswordToken token = new UsernamePasswordToken(username, password, false);
+            Subject subject = getSubject();
+            if (subject != null) {
+                subject.logout();
+            }
+            try {
+                subject.login(token);
+            }catch (Exception e){
+                throw new Exception();
+            }
+
+            boolean authenticated = subject.isAuthenticated();
+            Serializable userToken = subject.getSession().getId();
+
+            return ResultUtil.success(userToken);
         }
         return ResultUtil.failed("插入用户失败",-1) ;
     }
