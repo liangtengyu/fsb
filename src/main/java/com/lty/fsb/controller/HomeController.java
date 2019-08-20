@@ -25,7 +25,7 @@ import static org.apache.shiro.SecurityUtils.getSubject;
  */
 @Validated
 @RestController
-@CrossOrigin
+//@CrossOrigin
 public class HomeController  {
     @Autowired
     TUserServiceImpl userService;

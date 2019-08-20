@@ -29,7 +29,7 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/index.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("/error/403");
 
         //配置拦截器链，注意顺序
@@ -37,15 +37,16 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/reg", "anon");
+        filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/gifCode", "anon");
-
+        filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/fonts/**", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/lib/**", "anon");
 
-        filterChainDefinitionMap.put("/**", "user");
+        /*filterChainDefinitionMap.put("/**", "user");*/
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;

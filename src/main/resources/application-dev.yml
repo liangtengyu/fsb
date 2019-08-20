@@ -2,6 +2,10 @@ server:
   port: 9999
 #alibaba的druid数据库连接池配置
 spring:
+  mvc:
+    static-path-pattern:/**
+  resources:
+    static-locations:classpath:/static/
   datasource:
     dynamic:
       primary: master #设置默认的数据源或者数据源组,默认值即为master
@@ -55,7 +59,6 @@ mybatis-plus:
     db-config:
       #id类型
      id-type: auto
-
 
 
 
