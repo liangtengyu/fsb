@@ -92,7 +92,7 @@ public class ShiroConfig {
     }
 
     /**
-     * 这句 解决了从application-dev.yml中获取不到redis配置值得问题  原因不详 有知道答案的吗 ？ 0.0
+     * 这句 解决了从application-dev.yml中获取不到redis配置值得问题  原因不详 有知道答案的吗
      * @return
      */
     @Bean

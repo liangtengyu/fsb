@@ -23,10 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 @Order(-99) // 控制多个Aspect的执行顺序，越小越先执行
 @Component
 public class HttpAspect {
-
 	private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
-
-
 	/**
 	 * @Pointcut 可以减少重复代码,直接引用@Pointcut这个注解的方法名
 	 */
@@ -39,7 +36,6 @@ public class HttpAspect {
 	public void logAll() {
 		
 	}*/
-	
 	@Before("log()")
   	public void logBefore(JoinPoint joinPoint) {
 
